@@ -1,0 +1,39 @@
+---
+layout: default
+---
+<div class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">{{ page.bird }}</h1>
+  </header>
+
+  <article class="post-content">
+    <p>Posts listing {{ page.bird }}:</p>
+
+
+
+<table>
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Title</th>
+      <th>(Location)</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for post in site.posts reversed %}
+    {% assign birdlist = post | map: 'birds' | downcase %}
+    {% assign birdy = page.bird | downcase %}
+    {% if birdlist contains birdy %}
+      <tr>
+        <td><a href="{{ post.url | prepend: site.baseurl }}">{{ post.date | date: "%b %-d, %Y" }}</a></td>
+        <td><a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a></td>
+        <td>{{ post.location }}</td>
+      </tr>
+    {% endif %}
+  {% endfor %}
+  </tbody>
+</table>
+  </article>
+
+</div>
