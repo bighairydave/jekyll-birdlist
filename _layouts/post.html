@@ -29,7 +29,7 @@ layout: default
          <a href="/birds/{{ birdies.last | downcase | replace: ' ', '-' }}">{{ birdies.last }}</a>.
         </div>
       <hr>
-      {% if page.lifelist %}
+      {% if page.lifelist.size != 0 %}
         <h3>Lifelist additions for this entry:</h3>
         <div class="birdstring">
         {% assign lifers = page.lifelist | sort %}
