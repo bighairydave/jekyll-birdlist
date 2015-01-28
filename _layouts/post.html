@@ -12,42 +12,36 @@ layout: default
     {{ content }}
   </article>
 
-  <div class="birdlist">
-
-    <h3>Birds in this entry:</h3>
-
-
-    {% if page.birds %}
-      <div class="birdstring">
-      {% assign birdies = page.birds | sort %}
-      {% for birdy in birdies %}
-        {% if birdy != birdies.last %}
-          <a href="/birds/{{ birdy | downcase | replace: ' ', '-' }}">{{ birdy}}</a>,
-        {% endif %} 
-      {% endfor %}
-      and <a href="/birds/{{ birdies.last | downcase | replace: ' ', '-' }}">{{ birdies.last}}</a>.
-      </div>
-    {% endif %}
-  </div>
-<div class="birdlist">
-
-  {% if page.lifelist %}
-  <hr>
-    <h3>Lifelist additions for this entry:</h3>
-    <div class="birdstring">
-    {% assign lifers = page.lifelist | sort %}
-        {% for birdy in lifers %}
-          {% if birdy != lifers.last %}
+  {% if page.birds %}
+    <div class="birdlist">  
+      <hr>
+      <h3>Birds in this entry:</h3>
+        <div class="birdstring">
+        {% assign birdies = page.birds | sort %}
+        {% for birdy in birdies %}
+          {% if birdy != birdies.last %}
             <a href="/birds/{{ birdy | downcase | replace: ' ', '-' }}">{{ birdy}}</a>,
           {% endif %} 
         {% endfor %}
         and <a href="/birds/{{ birdies.last | downcase | replace: ' ', '-' }}">{{ birdies.last}}</a>.
-    </div>
-  {% else %}
-    <h3>No lifers today!</h3>
+        </div>
+      <hr>
+      {% if page.lifelist %}
+          <h3>Lifelist additions for this entry:</h3>
+          <div class="birdstring">
+          {% assign lifers = page.lifelist | sort %}
+              {% for birdy in lifers %}
+                {% if birdy != lifers.last %}
+                  <a href="/birds/{{ birdy | downcase | replace: ' ', '-' }}">{{ birdy}}</a>,
+                {% endif %} 
+              {% endfor %}
+              and <a href="/birds/{{ birdies.last | downcase | replace: ' ', '-' }}">{{ birdies.last}}</a>.
+          </div>
+        {% else %}
+          <p>No lifers today!</p>
+      {% endif %}
+      <hr><a href="/lifelist/">View my life list</a>
   {% endif %}
-  <hr>
-  <a href="/lifelist/">View my life list</a>
-</div>
+  </div>
 
 </div>
