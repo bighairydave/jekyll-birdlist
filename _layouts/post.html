@@ -19,24 +19,30 @@ layout: default
         <div class="birdstring">
         {% assign birdies = page.birds | sort %}
         {% for birdy in birdies %}
-          {% if birdy != birdies.last %}
-            <a href="/birds/{{ birdy | downcase | replace: ' ', '-' }}">{{ birdy}}</a>,
-          {% endif %} 
+          {% unless birdy == birdies.last %}
+            <a href="/birds/{{ birdy | downcase | replace: ' ', '-' }}">{{ birdy }}</a>,
+          {% endunless %} 
         {% endfor %}
-        and <a href="/birds/{{ birdies.last | downcase | replace: ' ', '-' }}">{{ birdies.last}}</a>.
+        {% if birdies.size > 1 %}
+        and
+        {% endif %}
+         <a href="/birds/{{ birdies.last | downcase | replace: ' ', '-' }}">{{ birdies.last }}</a>.
         </div>
       <hr>
       {% if page.lifelist %}
-          <h3>Lifelist additions for this entry:</h3>
-          <div class="birdstring">
-          {% assign lifers = page.lifelist | sort %}
-              {% for birdy in lifers %}
-                {% if birdy != lifers.last %}
-                  <a href="/birds/{{ birdy | downcase | replace: ' ', '-' }}">{{ birdy}}</a>,
-                {% endif %} 
-              {% endfor %}
-              and <a href="/birds/{{ birdies.last | downcase | replace: ' ', '-' }}">{{ birdies.last}}</a>.
-          </div>
+        <h3>Lifelist additions for this entry:</h3>
+        <div class="birdstring">
+        {% assign lifers = page.lifelist | sort %}
+          {% for birdy in lifers %}
+            {% unless birdy == lifers.last %}
+              <a href="/birds/{{ birdy | downcase | replace: ' ', '-' }}">{{ birdy }}</a>,
+            {% endunless %} 
+          {% endfor %}
+          {% if lifers.size > 1 %}
+          and 
+          {% endif %}
+          <a href="/birds/{{ birdies.last | downcase | replace: ' ', '-' }}">{{ lifers.last }}</a>.
+        </div>
         {% else %}
           <p>No lifers today!</p>
       {% endif %}
